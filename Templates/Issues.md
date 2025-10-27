@@ -19,10 +19,10 @@ Example:
 - [ ] Update documentation
 
 
-# Proposed solution
+# Proposed solution (optional)
 Outline a possible implementation.
 
-# Alternatives considered
+# Alternatives considered (optional)
 Any existing solutions or approaches you considered.
 
 # Acceptance criteria
