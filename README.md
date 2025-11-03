@@ -4,7 +4,7 @@
 
 # About the project
 
-This repository was created to store templates for daily meetings, issues, Pull Requests, and other useful documentation. It also helps the team organize goals, track meetings, and document discussions in a clear and simple way.
+This repository was created to store templates for daily meetings, issues, Pull Requests, and other useful documentation. It also helps the team organize goals, track meetings, and share efficient stratagies & feedbacks.
 
 # Overview
 
