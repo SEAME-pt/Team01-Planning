@@ -1,12 +1,12 @@
 <h1 align="center"> 
-  🕹️ Team1 
+  Team1 
 </h1> 
 
-# 💡 About the project
+# About the project
 
 This repository was created to store templates for daily meetings, issues, Pull Requests, and other useful documentation. It also helps the team organize goals, track meetings, and document discussions in a clear and simple way.
 
-# 🔍 Overview
+# Overview
 
 Our default time for the first meeting of the day is 10:00 AM. However, this schedule is flexible, meaning that although a time is set, there is no strict pressure if a team member needs to delay it.
 
@@ -32,7 +32,7 @@ This repository includes three types of templates:
 
 Their use is highly recommended to keep communication clear, organized, and efficient.
 
-## 📄 Shared Documents
+## Shared Documents
 
 - **Daily Meetings Document**  
   We use a shared Google Doc to record agendas, notes, and action items from our daily meetings.  
