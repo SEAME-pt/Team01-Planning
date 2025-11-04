@@ -1,23 +1,38 @@
 <h1 align="center"> 
-  🕹️ Team1 
+  Team1 
 </h1> 
 
-💡 About the project
+# About the project
 
-Repositorio criado com o objetivo de organizar os objetivos e as meetings da equipa assim como decomenta-las de uma forma clara e simples em um documento google doc.
+This repository was created to store templates for daily meetings, issues, Pull Requests, and other useful documentation. It also helps the team organize goals, track meetings, and share efficient stratagies & feedbacks.
 
+# Overview
 
-# 🔍 Overview
+Our default time for the first meeting of the day is 10:00 AM. However, this schedule is flexible, meaning that although a time is set, there is no strict pressure if a team member needs to delay it.
 
-Meetings estipulas:
-Com um horario flexivel, temos um horario estipulado as 10 am para fazer a primeira meeting do dia. É de notar que flexivel, neste caso, significa que mesmo tendo
-um horario marcado nao existe a cobrança caso um membro prefira chegar ao laboratorio apenas de tarde.
+### Purpose of the Daily Meeting:
 
-Objetivo da meeting:
+- Yesterday’s progress – What was completed the day before
 
-As meetings diárias têm como base as seguintes etapas -> O que foi realizado no dia anterior, 
+- Today’s objectives – What each member aims to achieve by the end of the day
 
-## 📄 Shared Documents
+- Blockers – Any challenges or obstacles that may impact progress
+
+- Time management & strategies – Short discussion on planning, approach, and improvements
+
+- Feedback – Sharing constructive input and aligning as a team
+
+### Templates
+
+This repository includes three types of templates:
+
+- Daily Logs
+- Issues
+- Pull Requests
+
+Their use is highly recommended to keep communication clear, organized, and efficient.
+
+## Shared Documents
 
 - **Daily Meetings Document**  
   We use a shared Google Doc to record agendas, notes, and action items from our daily meetings.  
