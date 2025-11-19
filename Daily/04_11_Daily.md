@@ -1,13 +1,7 @@
 ```markdown
-# Daily Team Log — YYYY-MM-DD
+# Daily Team Log — 04-11-2025
 Team: Joao, Afonso, Jose, Rafa
-Facilitator: <name> | Time: HH:MM
-
-## Quick Status (one-line per person)
-- Joao: [status] — short summary
-- Afonso: [status] — short summary
-- Jose: [status] — short summary
-- Rafa: [status] — short summary
+Facilitator: Afonso
 
 ---
 
@@ -19,8 +13,6 @@ Facilitator: <name> | Time: HH:MM
 - Today / Plan
   - Revision of the qt documentation and learn qt.
   - Revision of the joystick documentation.
-- Blockers / Needs
-  - None
 - Time spent (estimate)
   - 1 hour
  
@@ -30,8 +22,6 @@ Facilitator: <name> | Time: HH:MM
   - Local host packages on other pc, to install on raspbery pi easily
 - Today / Plan
   - Cross compilation
-- Blockers / Needs
-  - None
 - Time spent (estimate)
   - 5 hours
 
@@ -41,8 +31,6 @@ Facilitator: <name> | Time: HH:MM
   - adding speed sensor to raspbery pi
 - Today / Plan
   - integrate speed sensor code
-- Blockers / Needs
-  - None
 - Time spent (estimate)
   - 11 hours
 - Notes / Links
@@ -54,7 +42,5 @@ Facilitator: <name> | Time: HH:MM
 - Wins
   -  Built agl with working wifi and gui
   -  Added speed sensor to raspberry pi
-- Outstanding blockers
-  - None
 
 ```

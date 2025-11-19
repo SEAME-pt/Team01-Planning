@@ -1,13 +1,7 @@
 ```markdown
-# Daily Team Log — YYYY-MM-DD
+# Daily Team Log — 30-10-2025
 Team: Joao, Afonso, Jose, Rafa
-Facilitator: <name> | Time: HH:MM
-
-## Quick Status (one-line per person)
-- Joao: [status] — short summary
-- Afonso: [status] — short summary
-- Jose: [status] — short summary
-- Rafa: [status] — short summary
+Facilitator: Afonso
 
 ---
 
@@ -18,8 +12,7 @@ Facilitator: <name> | Time: HH:MM
   - - [ ] Finished 3d Model of the Car
 - Today / Plan
   - - [ ] Gonna mount the screen to the card
-- Blockers / Needs
-  - - No blockers still.
+
 - Time spent (estimate)
   - - 2 hours
 - Notes / Links
@@ -31,12 +24,10 @@ Facilitator: <name> | Time: HH:MM
 - Today / Plan
   - Complete the final documentation on qt.
   - Compile qt in the agl.
-- Blockers / Needs
-  - - [ ]
+
 - Time spent (estimate)
   - 3 hours.
-- Notes / Links
-  - - 
+
 
 ### Jose
 - Yesterday / Completed
@@ -47,8 +38,7 @@ Facilitator: <name> | Time: HH:MM
   - None, but will spend less time due to 42 exam.
 - Time spent (estimate)
   - 7 hours.
-- Notes / Links
-  - - 
+
 
 ### Rafa
 - Yesterday / Completed
@@ -59,8 +49,6 @@ Facilitator: <name> | Time: HH:MM
   - Arduinos, and pull rates.
 - Time spent (estimate)
   - 2 hours
-- Notes / Links
-  - - 
 
 ---
 
