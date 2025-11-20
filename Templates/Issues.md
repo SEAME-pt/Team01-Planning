@@ -31,3 +31,13 @@ Feture -> Use this type if something new needs to be added that does not current
 
 Task -> Use this type for general work that is needed but is not a bug or a new feature. For example: documentation updates, refactoring, testing, or research tasks.
 ```
+
+If an issue corresponds to an EPIC, please mark it with the EPIC label.
+
+```markdown
+- Requires a whole sprint or more to complete.
+- Cannot be realistically finished in a single task or user story.
+- Must be broken down into smaller sub-issues or tasks.
+- Represents a major feature, objective, or milestone.
+- May involve multiple team members, components, or areas of the project.
+```
