@@ -15,6 +15,7 @@ Related: #<issue_number>
 - [ ] Performance improvement
 - [ ] Chore / refactor
 - [ ] Release
+- [ ] Testing
 
 ## Proposed changes
 Describe the proposed implementation at a high level.
