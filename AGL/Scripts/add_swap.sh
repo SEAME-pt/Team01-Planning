@@ -5,9 +5,9 @@
 
 set -e
 
-echo "Creating $(1)G swap file..."
+echo "Creating $1G swap file..."
 echo "This may take a few minutes..."
-sudo fallocate -l $(1)G /swapfile-extra || sudo dd if=/dev/zero of=/swapfile-extra bs=1M count=131072
+sudo fallocate -l $1G /swapfile-extra || sudo dd if=/dev/zero of=/swapfile-extra bs=1M count=$(($1*1024))
 
 echo "Setting correct permissions..."
 sudo chmod 600 /swapfile-extra
@@ -22,7 +22,7 @@ echo "Verifying swap..."
 free -h
 
 echo ""
-echo "✅ Additional 128GB swap activated! BitBake will never BOOM again! :3"
+echo "✅ Additional ${1}GB swap activated! BitBake will never BOOM again! :3"
 echo ""
 echo "To make this permanent (survive reboots), run:"
 echo "  echo '/swapfile-extra none swap sw 0 0' | sudo tee -a /etc/fstab"

@@ -127,7 +127,7 @@ chmod +x *.sh  # Make scripts executable (first time only)
 
 1. **Before building:**
    ```bash
-   ./add_swap.sh 128           # Add 128GB extra swap
+   ./add_swap.sh <Size_in_Gb>           # Add 128GB extra swap
    ./configure_memory.sh     # Optimize memory settings
    ```
 

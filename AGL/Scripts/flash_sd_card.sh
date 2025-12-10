@@ -5,7 +5,6 @@ set -e
 
 # Image file (compressed)
 IMAGE="/home/team1/AGL/build/tmp/deploy/images/raspberrypi5/agl-image-minimal-crosssdk-raspberrypi5.rootfs.wic.xz"
-BMAP="/home/team1/AGL/build/tmp/deploy/images/raspberrypi5/agl-image-minimal-crosssdk-raspberrypi5.rootfs.wic.bmap"
 
 # SD card device (CHANGE THIS IF NEEDED!)
 DEVICE="/dev/sda"
@@ -33,7 +32,7 @@ fi
 
 echo ""
 echo "Step 1: Unmounting all partitions on $DEVICE..."
-sudo umount ${DEVICE}p* 2>/dev/null || echo "No partitions were mounted"
+sudo umount ${DEVICE}[0-9]* 2>/dev/null || echo "No partitions were mounted"
 
 echo ""
 echo "Step 2: Flashing image to SD card with dd..."
