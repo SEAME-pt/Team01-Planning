@@ -5,6 +5,21 @@
 
 set -e
 
+
+# Input validation for swap size argument
+if [ -z "$1" ]; then
+    echo "❌ Error: Please specify swap size in GB"
+    echo "Usage: $0 <size_in_GB>"
+    exit 1
+fi
+if ! [[ "$1" =~ ^[0-9]+$ ]]; then
+    echo "❌ Error: Size must be a positive integer"
+    exit 1
+fi
+if [ "$1" -le 0 ]; then
+    echo "❌ Error: Size must be greater than zero"
+    exit 1
+fi
 echo "Creating $1G swap file..."
 echo "This may take a few minutes..."
 sudo fallocate -l $1G /swapfile-extra || sudo dd if=/dev/zero of=/swapfile-extra bs=1M count=$(($1*1024))
