@@ -89,7 +89,7 @@ chmod +x *.sh  # Make scripts executable (first time only)
 
 **⚠️ WARNING:** This will erase ALL data on the target device!
 
-**Configuration(modify in script if needed):**
+**Configuration (modify in script if needed):**
 - **Image path:** `/home/team1/AGL/build/tmp/deploy/images/raspberrypi5/agl-image-minimal-crosssdk-raspberrypi5.rootfs.wic.xz`
 - **Target device:** `/dev/sda`
 
