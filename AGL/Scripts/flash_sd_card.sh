@@ -15,6 +15,12 @@ fi
 # SD card device (CHANGE THIS IF NEEDED!)
 DEVICE="/dev/sda"
 
+# Check that the device exists
+if [ ! -b "$DEVICE" ]; then
+    echo "❌ Error: Device not found: $DEVICE"
+    echo "Please check the device path with 'lsblk' and update the DEVICE variable."
+    exit 1
+fi
 echo "========================================"
 echo "AGL Image Flash Tool for Raspberry Pi 5"
 echo "========================================"
