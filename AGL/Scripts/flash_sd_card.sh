@@ -4,7 +4,8 @@
 set -e
 
 # Image file (compressed)
-IMAGE="/home/team1/AGL/build/tmp/deploy/images/raspberrypi5/agl-image-minimal-crosssdk-raspberrypi5.rootfs.wic.xz"
+AGL_TOP="${AGL_TOP:-$HOME/AGL}"
+IMAGE="$AGL_TOP/build/tmp/deploy/images/raspberrypi5/agl-image-minimal-crosssdk-raspberrypi5.rootfs.wic.xz"
 
 # SD card device (CHANGE THIS IF NEEDED!)
 DEVICE="/dev/sda"
