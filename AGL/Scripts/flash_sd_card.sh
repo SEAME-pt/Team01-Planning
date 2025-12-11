@@ -31,7 +31,7 @@ lsblk -p "$DEVICE"
 echo ""
 
 read -p "Are you sure you want to continue? (type 'yes' to proceed): " confirm
-if [ "$confirm" != "yes" ]; then
+if [[ ! "${confirm,,}" =~ ^(yes|y)$ ]]; then
     echo "Aborted."
     exit 1
 fi
