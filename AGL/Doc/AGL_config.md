@@ -1,6 +1,6 @@
 # AGL Configuration File Documentation
 
-[Previous file to start config AGL](./ALG_minimal_build.md)
+[Previous file to start config AGL](./AGL_minimal_build.md)
 
 The AGL configuration file is located at `~/AGL/build/conf/local.conf`
 
