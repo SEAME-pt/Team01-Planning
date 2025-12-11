@@ -7,6 +7,11 @@ set -e
 AGL_TOP="${AGL_TOP:-$HOME/AGL}"
 IMAGE="$AGL_TOP/build/tmp/deploy/images/raspberrypi5/agl-image-minimal-crosssdk-raspberrypi5.rootfs.wic.xz"
 
+if [ ! -f "$IMAGE" ]; then
+    echo "❌ Error: Image file not found: $IMAGE"
+    echo "Please verify your build completed successfully and the path is correct."
+    exit 1
+fi
 # SD card device (CHANGE THIS IF NEEDED!)
 DEVICE="/dev/sda"
 
