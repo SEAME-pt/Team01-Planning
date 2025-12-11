@@ -1,0 +1,12 @@
+[Unit]
+Description=Run custom wifi startup commands
+# If your commands need network, uncomment next lines:
+Wants=network-online.target
+After=systemd-networkd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/ft_startup_wifi.sh
+
+[Install]
+WantedBy=multi-user.target
