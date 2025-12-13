@@ -48,8 +48,9 @@ echo ""
 
 cd "$PROJECT_DIR"
 
-# Set number of parallel jobs
+# Set number of parallel jobs (try Linux, then macOS, fallback to 4)
 JOBS=$(nproc 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)
+echo -e "${BLUE}Parallel Jobs:${NC} $JOBS"
 
 if make -j"$JOBS" BUILD_TYPE="$BUILD_TYPE"; then
     echo ""

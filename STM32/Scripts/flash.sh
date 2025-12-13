@@ -21,8 +21,14 @@ echo "⚡ STM32 Flash Programming Script"
 echo "========================================"
 echo ""
 
-# Expand wildcard for firmware file
-FIRMWARE_BIN=$(eval echo "$FIRMWARE_BIN" | head -n1)
+# Expand wildcard for firmware file (safely)
+if [[ "$FIRMWARE_BIN" == *"*"* ]]; then
+    # Contains wildcard, expand it safely
+    shopt -s nullglob
+    FILES=($FIRMWARE_BIN)
+    FIRMWARE_BIN="${FILES[0]}"
+    shopt -u nullglob
+fi
 
 # Check if firmware file exists
 if [ ! -f "$FIRMWARE_BIN" ]; then
@@ -36,7 +42,7 @@ fi
 echo -e "${BLUE}Firmware File:${NC} $FIRMWARE_BIN"
 echo -e "${BLUE}Flash Address:${NC} $FLASH_ADDRESS"
 echo -e "${BLUE}Flash Method:${NC} $FLASH_METHOD"
-echo -e "${BLUE}File Size:${NC} $(stat -f%z "$FIRMWARE_BIN" 2>/dev/null || stat -c%s "$FIRMWARE_BIN") bytes"
+echo -e "${BLUE}File Size:${NC} $(if [[ "$OSTYPE" == "darwin"* ]]; then stat -f%z "$FIRMWARE_BIN"; else stat -c%s "$FIRMWARE_BIN"; fi) bytes"
 echo ""
 
 # Function to flash using st-link
