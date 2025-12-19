@@ -76,7 +76,7 @@ on:
   push:                    # Run on every push
   pull_request:           # Run on every PR
   schedule:
-    - cron: '0 2 * * *'    # Run daily at 2 AM
+    - cron: '0 2 * * *'    # Run daily at 2 AM (UTC)
 ```
 
 ### 3. **Jobs**
