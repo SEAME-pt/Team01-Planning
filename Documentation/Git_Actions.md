@@ -1,4 +1,4 @@
-# GitHub Actions Documentation
+# Git / GitHub Actions Documentation
 
 ## Table of Contents
 1. [What is GitHub Actions?](#what-is-github-actions)
