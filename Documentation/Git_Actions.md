@@ -328,10 +328,10 @@ jobs:
 
 ### 1. **Use Specific Versions**
 ```yaml
-# Good ✅
+# Good ✅: Pin to a specific major version for stability and predictable behavior
 uses: actions/checkout@v4
 
-# Bad ❌
+# Bad ❌: Using @main follows the latest commits, which can introduce breaking changes without warning
 uses: actions/checkout@main
 ```
 
