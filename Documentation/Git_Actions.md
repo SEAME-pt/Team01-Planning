@@ -106,7 +106,7 @@ steps:
 ## Essential Components
 
 ### Checkout Action
-**Always start with this** - it downloads your repository code:
+**In most code-based workflows, you’ll start with this** – it downloads your repository code:
 ```yaml
 - name: Checkout repository
   uses: actions/checkout@v4
