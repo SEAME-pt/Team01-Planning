@@ -16,7 +16,11 @@ The main purpose of this project is training and learning the technologies used 
 - Implementation of tests that can validate that our code works correctly
 ## System Architecture
 
-### Hardware -> get_img the hardware
+### Hardware 
+<p align="center">
+  <img src="https://res.cloudinary.com/dtyy8f2os/image/upload/v1758021621/76256064-7c6a-4b7a-8057-de01047c410c.png">
+</p>
+
 ### Struct_the project  softwere :
 
 This project has its basic structure centered on two key controllers: a [ Raspberry Pi ](https://github.com/SEAME-pt/Car_control_Raspberry/blob/main/) and an [ STM32 ](https://github.com/SEAME-pt/STM32_Microcontroller). → link_for_code
