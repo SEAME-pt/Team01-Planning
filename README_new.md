@@ -19,7 +19,7 @@ The main purpose of this project is training and learning the technologies used 
 ### Hardware -> get_img the hardware
 ### Struct_the project  softwere :
 
-This project has its basic structure centered on two key controllers: a Raspberry Pi and an STM32. → link_for_code
+This project has its basic structure centered on two key controllers: a [ Raspberry Pi ](https://github.com/SEAME-pt/Car_control_Raspberry/blob/main/) and an [ STM32 ](https://github.com/SEAME-pt/STM32_Microcontroller). → link_for_code
 The Raspberry Pi is responsible for the instrument cluster based on Qt, where we can visualize all vehicle information such as speed, temperature, trajectory, etc.
 In addition to displaying data to the user, the Raspberry Pi has the important mission of converting data from the car’s camera into indications that will be sent to the STM32.
 The STM32 is responsible for managing all the commands sent by the Raspberry Pi, assigning the appropriate priority to each received command, and deciding whether to stop the car, increase speed, or execute other actions.
@@ -50,6 +50,10 @@ Implemented / In progress / Planned
 AGL, Qt, ThreadX, CAN, OpenCV, etc.
 
 ##  Build & Documentation
+- [ AGL ]( https://github.com/SEAME-pt/Team01-Planning/blob/main/AGL/Doc/AGL_minimal_build.md )
+- [ Raspberry ](https://github.com/SEAME-pt/Car_control_Raspberry/blob/main/)
+- [ QT_softwere ](https://github.com/SEAME-pt/Qt_Interface)
+
 Links para documentação separad
 
 
