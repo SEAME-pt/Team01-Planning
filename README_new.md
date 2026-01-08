@@ -23,7 +23,7 @@ The main purpose of this project is training and learning the technologies used 
 
 ### Struct_the project  softwere :
 
-This project has its basic structure centered on two key controllers: a [ Raspberry Pi ](https://github.com/SEAME-pt/Car_control_Raspberry/blob/main/) and an [ STM32 ](https://github.com/SEAME-pt/STM32_Microcontroller). → link_for_code
+This project has its basic structure centered on two key controllers: a [ Raspberry Pi ](https://github.com/SEAME-pt/Car_control_Raspberry/blob/main/) and an [ STM32 ](https://github.com/SEAME-pt/STM32_Microcontroller). 
 The Raspberry Pi is responsible for the instrument cluster based on Qt, where we can visualize all vehicle information such as speed, temperature, trajectory, etc.
 In addition to displaying data to the user, the Raspberry Pi has the important mission of converting data from the car’s camera into indications that will be sent to the STM32.
 The STM32 is responsible for managing all the commands sent by the Raspberry Pi, assigning the appropriate priority to each received command, and deciding whether to stop the car, increase speed, or execute other actions.
@@ -48,16 +48,24 @@ To ensure that all commands are executed safely, the STM32 runs an RTOS (Real-Ti
 Test types and methodology
 
 ##  Project Status
-Implemented / In progress / Planned
+- [x] Build AGL -> Implemented 
+- [x] ThreadX in stm32 -> Implemnted
+- [ ] Can-fd communication -> In progress
+	- [ ] STM32 Can-fd
+ 	- [ ] Raspbery Can-fd
+- [ ] STM32 communication with expansion board via I2C
+- [ ] road identification
+- [ ] Automatic steering control
+        
 
 ## Technologies Used
-AGL, Qt, ThreadX, CAN, OpenCV, etc.
+[ AGL ](https://www.automotivelinux.org/), [ Qt ](https://www.qt.io/), [ ThreadX ](https://github.com/eclipse-threadx/threadx) , [ CAN ](https://www.csselectronics.com/pages/can-fd-flexible-data-rate-intro), [OpenCV](https://opencv.org/), etc.
 
 ##  Build & Documentation
 - [ AGL ]( https://github.com/SEAME-pt/Team01-Planning/blob/main/AGL/Doc/AGL_minimal_build.md )
 - [ Raspberry ](https://github.com/SEAME-pt/Car_control_Raspberry/blob/main/)
 - [ QT_softwere ](https://github.com/SEAME-pt/Qt_Interface)
+- [ github_acion/testing](https://github.com/SEAME-pt/Team01-Planning/blob/main/Documentation/Git_Actions.md#what-is-github-actions)
 
-Links para documentação separad
 
 
