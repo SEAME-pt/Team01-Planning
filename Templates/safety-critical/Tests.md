@@ -43,4 +43,3 @@ and reliable validation of safety-critical behavior across the project.
 Test suite names shall reflect the module under test
 Test names shall describe expected behavior
 Avoid generic names like Test1, BasicTest
-After
