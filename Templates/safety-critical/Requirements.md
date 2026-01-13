@@ -23,7 +23,8 @@ This template defines the structure and rules for writing software requirements 
 Start every requirements file with a small table listing all requirement IDs and their descriptions.
 
 ```text
-# Small title for this block (the porpose is to divide blocks for each title)
+### Small title for this block (the porpose is to divide blocks for each title)
+
 |Requirement ID | Type | Title
 |---------------|------|-------------
 | SWR-STM32-001 | SR   | Wheel Speed Telemetry
