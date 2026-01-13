@@ -23,9 +23,9 @@ This template defines the structure and rules for writing software requirements 
 Start every requirements file with a small table listing all requirement IDs and their descriptions.
 
 ```text
-|Requirement ID | Type | Description
+|Requirement ID | Type | Title
 |---------------|------|-------------
-| SWR-STM32-001 | SR  | Calculate wheel RPM
+| SWR-STM32-001 | SR   | Calculate wheel RPM
 | SWR-STM32-002 | SWR  | Transmit RPM via CAN
 | RSR-STM32-001 | RSR  | Handle sensor failure safely
 ```
