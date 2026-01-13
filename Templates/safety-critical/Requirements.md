@@ -198,7 +198,7 @@ Requirements
 
 ```text
 project_root/
-├── requirements/
+├── safety_critical/
 │   └── traceability_matrix.md
 │   ├── index_requirements.md
 │   ├── Requirements.md
