@@ -182,7 +182,7 @@ Requirements
 # Example of Traceability table
 
 ```text
-| Requirement ID | Verification | Code Location | Test ID      | Description
+| Requirement ID | Verification | Code Location | Test ID      | Title
 | -------------- | ------------ | ------------- | ------------ | ------------
 | SWR-STM32-001  | Pass         | sensor.c      | UT-STM32-001 | Calculate RPM
 | SWR-STM32-002  | Pass         | can_tx.c      | IT-STM32-001 | CAN TX RPM
@@ -199,7 +199,9 @@ Requirements
 ```text
 project_root/
 ├── requirements/
-│   ├── requirements.md
+│   └── traceability_matrix.md
+│   ├── index_requirements.md
+│   ├── Requirements.md
 │
 ├── tests/
 │   ├── unit/
@@ -210,9 +212,6 @@ project_root/
 │   ├── integration/
 │   │   ├── it_stm32_can_flow.md   # end-to-end CAN tests
 │   │   └── test_can_flow.c
-│
-├── traceability/
-│   └── traceability_matrix.md
 │
 ├── src/
 │   ├── speed/
