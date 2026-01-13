@@ -25,10 +25,12 @@ Start every requirements file with a small table listing all requirement IDs and
 ```text
 |Requirement ID | Type | Description
 |---------------|------|-------------
-| SWR-STM32-001 | SWR  | Calculate wheel RPM
+| SWR-STM32-001 | SR  | Calculate wheel RPM
 | SWR-STM32-002 | SWR  | Transmit RPM via CAN
 | RSR-STM32-001 | RSR  | Handle sensor failure safely
 ```
+
+When filling out this table, start by listing the SR first, followed by its corresponding child requirements (SWR and RSR).
 
 ### ID Rules
  - System Requirements (SR)
