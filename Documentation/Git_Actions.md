@@ -4,11 +4,9 @@
 1. [What is GitHub Actions?](#what-is-github-actions)
 2. [Getting Started](#getting-started)
 3. [Workflow Structure](#workflow-structure)
-4. [Essential Components](#essential-components)
-5. [Common Patterns](#common-patterns)
-6. [Project Examples](#project-examples)
-7. [Best Practices](#best-practices)
-8. [Troubleshooting](#troubleshooting)
+4. [Using Self-Hosted Runners](#using-self-hosted-runners)
+5. [Best Practices](#best-practices)
+6. [Troubleshooting](#troubleshooting)
 
 ---
 
@@ -103,225 +101,193 @@ steps:
 
 ---
 
-## Essential Components
+## Using Self-Hosted Runners
 
-### Checkout Action
-**In most code-based workflows, you’ll start with this** – it downloads your repository code:
+GitHub Actions can run on your own infrastructure using self-hosted runners. This is useful for:
+- **Special hardware access** (CAN interfaces, GPUs, etc.)
+- **Custom software environments**
+- **Security requirements** (keeping code within your network)
+- **Cost optimization** for high-compute workloads
+
+### Setting Up Self-Hosted Runners
+
+For detailed setup instructions, see [Self_Hosted_Runners.md](Self_Hosted_Runners.md).
+
+### Running Workflows on Self-Hosted Runners
+
+#### Basic Usage
 ```yaml
-- name: Checkout repository
-  uses: actions/checkout@v4
-```
-
-### Installing Dependencies
-Install what your project needs:
-```yaml
-# For C++ projects
-- name: Install C++ dependencies
-  run: |
-    sudo apt-get update
-    sudo apt-get install -y build-essential cmake libgtest-dev
-
-# For Python projects
-- name: Install Python dependencies
-  run: |
-    python -m pip install --upgrade pip
-    pip install -r requirements.txt
-
-# For Node.js projects
-- name: Install Node dependencies
-  run: npm install
-```
-
-### Running Commands
-Execute your build, test, or deployment commands:
-```yaml
-- name: Build project
-  run: |
-    mkdir build
-    cd build
-    cmake ..
-    make
-
-- name: Run tests
-  run: |
-    cd build
-    ./run-tests
-```
-
----
-
-## Common Patterns
-
-### Pattern 1: C++ Project with CMake and Tests
-```yaml
-name: C++ CI
-
-on: [push, pull_request]
-
-jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-      
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential cmake libgtest-dev
-      
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
-          cmake -DBUILD_TESTS=ON ..
-          make
-      
-      - name: Run tests
-        run: |
-          cd build
-          ctest --output-on-failure --verbose
-```
-
-### Pattern 2: System Setup (Hardware/Special Requirements)
-If your project needs special system setup:
-```yaml
-- name: Setup system requirements
-  run: |
-    # Load kernel modules (example: CAN interface)
-    if sudo modprobe vcan 2>/dev/null; then
-      sudo ip link add dev vcan0 type vcan
-      sudo ip link set up vcan0
-      echo "System setup complete"
-    else
-      echo "Warning: Special hardware not available"
-    fi
-```
-
-### Pattern 3: Python Project
-```yaml
-name: Python CI
-
-on: [push, pull_request]
-
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted  # Use any self-hosted runner
     
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-      
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          pip install pytest
-      
-      - name: Run tests
-        run: pytest tests/
+      - run: echo "Running on self-hosted runner"
 ```
 
-### Pattern 4: Multi-Step Pipeline
+#### Using Labels for Specific Runners
 ```yaml
-name: Full Pipeline
+jobs:
+  hardware-test:
+    runs-on: [self-hosted, linux, x64, can-enabled]  # Runner with CAN hardware
+    
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test CAN interface
+        run: ./test-can-interface.sh
+```
 
+#### Using Runner Groups (Organization/Enterprise)
+```yaml
+jobs:
+  secure-build:
+    runs-on:
+      group: secure-runners  # Specific runner group
+      labels: [linux, x64]
+    
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build sensitive project
+        run: ./secure-build.sh
+```
+
+### Safety Considerations for Self-Hosted Runners
+
+#### 1. **Use with Private Repositories Only**
+Self-hosted runners can be dangerous with public repositories because:
+- Forks can execute code on your infrastructure
+- Malicious PRs could compromise your network
+
+```yaml
+# ❌ Dangerous: Public repo with self-hosted runners
 on: [push, pull_request]
 
+# ✅ Safer: Private repo or restrict to trusted sources
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - '*.md'
+```
+
+#### 2. **Isolate Sensitive Operations**
+Use different runners for different trust levels:
+```yaml
 jobs:
   lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Check code style
-        run: ./lint.sh
-  
-  test:
-    needs: lint              # Wait for lint to pass
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run tests
-        run: ./test.sh
-  
+    runs-on: ubuntu-latest  # GitHub-hosted for untrusted code
+    
+  build:
+    runs-on: [self-hosted, trusted]  # Self-hosted for trusted builds
+    needs: lint
+    
   deploy:
-    needs: [lint, test]      # Wait for both to pass
-    if: github.ref == 'refs/heads/main'  # Only on main branch
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy
-        run: ./deploy.sh
+    runs-on: [self-hosted, secure]  # Most secure runner for deployment
+    needs: build
 ```
 
----
+#### 3. **Clean Up After Jobs**
+Ensure runners don't retain sensitive data:
+```yaml
+- name: Clean workspace
+  if: always()  # Run even if job fails
+  run: |
+    # Remove temporary files
+    rm -rf /tmp/build-artifacts
+    # Clear sensitive environment variables
+    unset SECRET_TOKEN
+```
 
-## Project Examples
+#### 4. **Network Security**
+- Keep runners in secure networks
+- Use VPNs for external access
+- Implement firewall rules
+- Regularly update runner software
 
-### Our C++ Car Control Project
-This is the actual workflow used in this repository:
+#### 5. **Access Control**
+- Use runner groups to limit repository access
+- Assign appropriate permissions
+- Audit runner usage regularly
+
+#### 6. **Monitor and Log**
+```yaml
+- name: Log runner info
+  run: |
+    echo "Runner: ${{ runner.name }}"
+    echo "OS: ${{ runner.os }}"
+    echo "Architecture: ${{ runner.arch }}"
+    echo "Job started at: $(date)"
+    
+- name: Send notifications on failure
+  if: failure()
+  run: |
+    curl -X POST -H 'Content-type: application/json' \
+      --data '{"text":"Self-hosted runner job failed"}' \
+      $SLACK_WEBHOOK_URL
+```
+
+### Best Practices for Self-Hosted Runners
+
+1. **Dedicated Hardware**: Use separate machines for CI/CD
+2. **Regular Updates**: Keep OS and runner software current
+3. **Resource Monitoring**: Monitor CPU, memory, and disk usage
+4. **Backup Strategies**: Have backup runners for redundancy
+5. **Security Scanning**: Regularly scan runners for vulnerabilities
+6. **Documentation**: Document your runner setup and policies
+
+### Example: Safe Self-Hosted Workflow
 
 ```yaml
-name: CI with Unit Tests
+name: Secure Hardware Testing
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+    types: [opened, synchronize, reopened]
 
 jobs:
-  unit-tests:
+  # Run basic checks on GitHub-hosted runners first
+  validate:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint code
+        run: ./lint.sh
+      - name: Static analysis
+        run: ./static-analysis.sh
+  
+  # Run hardware tests on self-hosted runners
+  hardware-test:
+    needs: validate
+    runs-on: [self-hosted, linux, x64, can-enabled]
     
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
       
-      - name: Install system dependencies
+      - name: Setup CAN interface
         run: |
-          sudo apt-get update
-          sudo apt-get install -y cmake build-essential pkg-config \
-            libsdl2-dev libgtest-dev can-utils linux-modules-extra-$(uname -r)
+          sudo modprobe vcan
+          sudo ip link add dev vcan0 type vcan
+          sudo ip link set up vcan0
       
-      - name: Set up virtual CAN interface
+      - name: Build and test
         run: |
-          if sudo modprobe vcan 2>/dev/null; then
-            sudo ip link add dev vcan0 type vcan
-            sudo ip link set vcan0 mtu 72
-            sudo ip link set up vcan0
-          fi
-      
-      - name: Build Google Test
-        run: |
-          cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
-          sudo make
-          sudo cp lib/*.a /usr/lib
-      
-      - name: Build project
-        run: |
-          mkdir build
-          cd build
+          mkdir build && cd build
           cmake -DBUILD_TESTS=ON ..
           make
+          ctest --output-on-failure
       
-      - name: Run unit tests
+      - name: Cleanup
+        if: always()
         run: |
-          cd build
-          ctest --output-on-failure --verbose
-```
-
-**What this workflow does:**
-- Runs on pushes and pull requests
-- Installs C++ tools, SDL2, Google Test, and CAN utilities
-- Sets up virtual CAN interface for hardware tests
-- Builds the project with CMake
-- Runs all unit tests with detailed output
-
+          sudo ip link delete vcan0
+          rm -rf build
 ---
 
 ## Best Practices
@@ -363,15 +329,23 @@ Begin with basic build and test, then add features like:
   run: ./must-succeed.sh
 ```
 
-### 5. **Use Conditions**
-```yaml
-- name: Deploy to production
-  if: github.ref == 'refs/heads/main'
-  run: ./deploy.sh
+### 6. **Security First with Self-Hosted Runners**
+- Use self-hosted runners only with private repositories
+- Implement proper access controls and runner groups
+- Regularly audit and update runner infrastructure
+- Clean up sensitive data after jobs complete
+- Monitor runner usage and performance
 
-- name: Notify on failure
-  if: failure()
-  run: echo "Something went wrong!"
+### 7. **Test on Multiple Runner Types**
+```yaml
+jobs:
+  test-github:
+    runs-on: ubuntu-latest
+    steps: [...]  # Test on GitHub-hosted
+  
+  test-self-hosted:
+    runs-on: self-hosted
+    steps: [...]  # Test on your infrastructure
 ```
 
 ---
@@ -405,16 +379,27 @@ Begin with basic build and test, then add features like:
 - Verify file is in `.github/workflows/`
 - Check YAML syntax
 
-### Debugging Commands
-```yaml
-- name: Debug info
-  run: |
-    echo "Runner OS: ${{ runner.os }}"
-    echo "GitHub event: ${{ github.event_name }}"
-    echo "Branch: ${{ github.ref }}"
-    pwd
-    ls -la
-```
+#### 4. **Self-Hosted Runner Issues**
+
+**Runner not available:**
+- Check if runner service is running: `sudo systemctl status actions.runner.*`
+- Verify network connectivity to GitHub
+- Check runner logs: `tail -f /home/runner/actions-runner/_diag/*.log`
+
+**Jobs stuck in queue:**
+- Ensure runner has required labels
+- Check runner group permissions
+- Verify runner is online in GitHub settings
+
+**Hardware access failures:**
+- Confirm hardware is connected and accessible
+- Check permissions for hardware devices
+- Verify kernel modules are loaded
+
+**Security concerns:**
+- Audit who has access to runner machines
+- Ensure runners are in secure networks
+- Regularly update runner software and OS
 
 ---
 
