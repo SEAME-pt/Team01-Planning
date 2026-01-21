@@ -21,10 +21,6 @@ reviewers:
 
 reviewed: ''
 
-references:
-  - type: "file"
-    path: requirements/srd/speed_sensor_input.md
-
 active: true
 derived: false
 normative: true

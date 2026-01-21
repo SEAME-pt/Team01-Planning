@@ -21,10 +21,6 @@ reviewers:
 
 reviewed: ''
 
-references:
-  - type: "file"
-    path: requirements/urd/vehicle_speed.md
-
 active: true
 derived: false
 normative: true
