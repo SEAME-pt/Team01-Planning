@@ -8,7 +8,8 @@ tsf_type: "Assertion"
 verification_method: "I2C bus testing, motor control integration testing, signal integrity verification, and fault injection testing."
 
 children:
-  - id: SWD-I2C_PROTOCOL_INTERFACE
+  - id: SWD-RASP_CAN_RX.md
+  - id: SWD-RASP_CAN_TX.md
 
 parents:
   - id: URD-CONTROL_VEHICLE_SPEED

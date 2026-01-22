@@ -1,0 +1,26 @@
+digraph G {
+rankdir=TB;
+newrank=true;
+"URD-CONTROL_VEHICLE_SPEED" [label="URD-CONTROL_VEHICLE_SPEED: # Requirement\nStatement ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"LLTC-RASP_CAN_RX_BASIC" [label="LLTC-RASP_CAN_RX_BASIC: # Test: Basic\nReceive and Dispatch ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SRD-QT_DASHBOARD" [label="SRD-QT_DASHBOARD: # Software Requirement\nStatement ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SRD-RASP_CAN_BUS" [label="SRD-RASP_CAN_BUS: # Software Requirement\nStatement ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SRD-STM32_CAN_BUS" [label="SRD-STM32_CAN_BUS: # Software Requirement\nStatement ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SWD-QT_DASHBOARD" [label="SWD-QT_DASHBOARD:  ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SWD-RASP_CAN_RX" [label="SWD-RASP_CAN_RX: # Software Design\nDescription ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SWD-RASP_CAN_TX" [label="SWD-RASP_CAN_TX: # Software Design\nDescription ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SWD-STM32_CAN_RX" [label="SWD-STM32_CAN_RX: # Software Design\nDescription ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"SWD-STM32_CAN_TX" [label="SWD-STM32_CAN_TX: # Software Design\nDescription ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"URD-DASHBOARD_DISPLAY_SPEED" [label="URD-DASHBOARD_DISPLAY_SPEED: # Requirement\nStatement ", URL="", target="_top", shape=box, fontname="Open Sans"];
+"URD-CONTROL_VEHICLE_SPEED" -> "SRD-RASP_CAN_BUS";
+"URD-CONTROL_VEHICLE_SPEED" -> "SRD-STM32_CAN_BUS";
+"SRD-QT_DASHBOARD" -> "SWD-QT_DASHBOARD";
+"SRD-RASP_CAN_BUS" -> "SWD-RASP_CAN_RX";
+"SRD-RASP_CAN_BUS" -> "SWD-RASP_CAN_TX";
+"SRD-STM32_CAN_BUS" -> "SWD-STM32_CAN_RX";
+"SRD-STM32_CAN_BUS" -> "SWD-STM32_CAN_TX";
+"SWD-RASP_CAN_RX" -> "LLTC-RASP_CAN_RX_BASIC";
+"URD-DASHBOARD_DISPLAY_SPEED" -> "SRD-RASP_CAN_BUS";
+"URD-DASHBOARD_DISPLAY_SPEED" -> "SRD-STM32_CAN_BUS";
+"URD-DASHBOARD_DISPLAY_SPEED" -> "SRD-QT_DASHBOARD";
+}
