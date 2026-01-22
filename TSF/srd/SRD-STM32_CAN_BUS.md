@@ -24,9 +24,9 @@ reviewers:
 
 reviewed: ''
 
-references:
-  - type: "standard"
-    name: "CAN 2.0B Specification"
+#references:
+#  - type: "standard"
+#    name: "CAN 2.0B Specification"
 
 active: true
 derived: false

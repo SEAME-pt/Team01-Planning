@@ -8,11 +8,11 @@ tsf_type: "Assertion"
 verification_method: "Demonstration during vehicle operation, user acceptance testing, and integration testing with speed sensor inputs."
 
 children:
-  #- id: SRD-CONTROL_VEHICLE_SPEED
   - id: SRD-STM32_CAN_BUS
   - id: SRD-RASP_CAN_BUS
-  #- id: SRD-STM32_I2C
-  #- id: SRD-SPEED_SENSOR
+  - id: SRD-CONTROL_VEHICLE_SPEED
+  - id: SRD-STM32_I2C
+  - id: SRD-SPEED_SENSOR
 
 parents: []
 

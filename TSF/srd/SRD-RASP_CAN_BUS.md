@@ -1,19 +1,17 @@
 ---
-id: SRD-RASP_CAN_BUS
-header: "Raspberry Pi CAN Bus Communication System"
+id: SRD-STM32_I2C
+header: "STM32 I2C Motor Control Interface"
 text: |
-  The Raspberry Pi shall implement CAN bus communication for sending control commands to the STM32 and receiving speed sensor data and system status. The CAN interface must ensure reliable, real-time data exchange with error detection and recovery, supporting the speed control, speed sensing, and emergency stop functionalities.
+  The system shall implement I2C communication on the STM32 microcontroller for controlling motor actuators. The I2C interface must reliably transmit speed control commands to motors, receive feedback status, and handle communication errors while supporting the vehicle speed control and emergency stop functionalities.
 
 tsf_type: "Assertion"
-verification_method: "CAN bus integration testing with STM32, message latency measurements, error injection testing, and protocol compliance verification on Raspberry Pi hardware."
+verification_method: "I2C bus testing, motor control integration testing, signal integrity verification, and fault injection testing."
 
 children:
-  - id: SWD-RASP_CAN_RX
-  - id: SWD-RASP_CAN_TX
+  - id: SWD-I2C_PROTOCOL_INTERFACE
 
 parents:
   - id: URD-CONTROL_VEHICLE_SPEED
-  - id: URD-SPEED_SENSOR
   - id: URD-EMERGENCY_STOP
 
 reviewers:
@@ -24,37 +22,28 @@ reviewers:
 
 reviewed: ''
 
-references:
-  - type: "file"
-    path: requirements/srd/rasp_can_bus.md
-  - type: "standard"
-    name: "CAN 2.0B Specification"
-  - type: "requirement"
-    id: SRD-CAN_BUS_COMMUNICATION
+#references:
+#  - type: "standard"
+#    name: "I2C Bus Specification"
 
 active: true
 derived: false
 normative: true
 level: 2.0
-tags: ["raspberry-pi", "can-bus", "communication", "real-time", "error-handling", "protocol", "priority-high"]
+tags: ["i2c", "motor-control", "stm32", "communication", "actuators", "priority-high"]
 
 ---
 # Software Requirement Statement
 
-The Raspberry Pi shall implement CAN bus communication that:
+The system shall implement I2C communication on STM32 that:
 
-- Operates at 500 kbps baud rate with 11-bit identifiers (CAN 2.0B) using CAN interface hardware
-- Sends motor control commands to STM32 with guaranteed delivery
-- Receives speed sensor data from STM32 with <10ms latency
-- Receives system status and diagnostic information via CAN messages
-- Implements error detection and automatic retransmission for corrupted messages
-- Provides heartbeat messages for connection monitoring with STM32
-- Handles bus-off recovery and fault-tolerant operation on Raspberry Pi hardware
-- Supports message prioritization for critical control commands
-- Maintains message integrity through CRC checking
-- Logs communication errors for diagnostics via Raspberry Pi logging system
-- Monitors CAN bus health and reports faults to user interface
-- Ensures deterministic timing for real-time control applications
-- Logs communication errors for diagnostics via STM32 serial interface
-- Monitors CAN bus health and reports faults to Raspberry Pi
-- Ensures deterministic timing for real-time control applications
+- Operates at 400 kHz fast mode with 7-bit addressing
+- Sends motor speed control commands (0-100% duty cycle) to motor controllers
+- Receives motor status feedback including current speed, temperature, and fault conditions
+- Implements master mode on STM32 for controlling multiple motor slaves
+- Provides error detection and retry mechanisms for I2C communication failures
+- Supports emergency stop commands with immediate motor shutdown capability
+- Maintains synchronization between commanded and actual motor speeds
+- Handles bus arbitration and multi-master scenarios if required
+- Monitors I2C bus health and reports communication faults
+- Ensures deterministic timing for real-time motor control applications
