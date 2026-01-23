@@ -17,11 +17,9 @@ children:
   - id: LLTC-STM32_CAN_TX_MALFORMED
   - id: LLTC-STM32_CAN_TX_BUFFER_OVERFLOW
   - id: LLTC-STM32_CAN_TX_CONCURRENCY
-  - id: LLTC-STM32_CAN_TX_E2E
 
 parents:
   - id: SRD-STM32_CAN_BUS
-  - id: URD-SPEED_SENSOR
 
 reviewers:
   - name: "Afonso Mota"
@@ -53,9 +51,9 @@ ensuring message integrity, timeliness and recoverability per SRD requirements.
   - Interacts with MCUs CAN peripheral and handles bus errors and interrupts.
 
 ## 3. Interfaces
-- init_can(bitrate: int)
-- send_sensor_frame(can_id: int, payload: bytes)
-- set_periodic_sensor(can_id: int, period_ms: int)
+#- init_can(bitrate: int)
+#- send_sensor_frame(can_id: int, payload: bytes)
+#- set_periodic_sensor(can_id: int, period_ms: int)
 
 ## 4. Algorithms
 - Fixed-rate transmission for sensor messages and event-driven transmissions for status/diagnostics.
@@ -65,5 +63,5 @@ ensuring message integrity, timeliness and recoverability per SRD requirements.
 - Corrupted payloads: log and attempt retransmission when appropriate.
 
 ## 6. Links to lower levels
-- LLTC-STM32_CAN_TX_* series covering basic functionality, latency, heartbeat, bus-off recovery, malformed frames, buffer overflow, concurrency and e2e integration.
+- LLTC-STM32_CAN_TX_* series covering basic functionality, latency, heartbeat, bus-off recovery, malformed frames, buffer overflow, concurrency.
 

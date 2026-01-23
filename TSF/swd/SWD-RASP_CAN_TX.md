@@ -17,7 +17,6 @@ children:
   - id: LLTC-RASP_CAN_TX_MALFORMED
   - id: LLTC-RASP_CAN_TX_BUFFER_OVERFLOW
   - id: LLTC-RASP_CAN_TX_CONCURRENCY
-  - id: LLTC-RASP_CAN_TX_E2E
 
 parents:
   - id: SRD-RASP_CAN_BUS
@@ -55,15 +54,46 @@ reliably and within timing constraints while respecting CAN arbitration and prio
   - Counters for transmit failures, retries, queue drops; diagnostics exported for telemetry.
 
 ## 3. Interfaces
-- start_tx(interface: str, bitrate: int = 500000) -> None
-- stop_tx() -> None
-- send_frame(can_id: int, payload: bytes, priority: int = 0, require_ack: bool = False) -> bool
-- configure_periodic(can_id: int, period_ms: int, payload: bytes) -> TimerId
+
+This project provides a thin C/C++ abstraction over Linux SocketCAN. The concrete
+interfaces available in the Raspberry Pi codebase are:
+
+- socketCan_init(interface: const char*) -> int
+  - Create a PF_CAN SOCK_RAW socket bound to the named interface and enable CAN_FD frames.
+  - Returns a socket file descriptor >= 0 on success or -1 on error.
+- check_mtu_support(int s, struct ifreq *ifr) -> int (internal)
+  - Query the interface MTU and determine whether it supports CAN (classical) or CAN_FD.
+- can_send_frame(int socket, uint16_t can_id, const int16_t* data, uint8_t len) -> int
+  - Transmit a Classical CAN frame (DLC max 8). Validates standard 11-bit CAN IDs (0x000–0x7FF).
+  - Returns 0 on success or -1 on error.
+- can_send_frame_fd(int socket, uint16_t can_id, const int16_t* data, uint8_t len) -> int
+  - Transmit a CAN_FD frame (payload up to 64 bytes). Uses CANFD_BRS flag for bit-rate switching.
+  - Returns 0 on success or -1 on error.
+- can_close(int socket) -> void
+  - Close the provided socket descriptor (safe no-op for negative descriptors).
+
+In C++ there is a `CANController` RAII wrapper that exposes higher-level APIs:
+
+- CANController::CANController(const std::string &interface)
+  - Constructor opens and initialises the socket (throws CANException on failure).
+- CANController::sendFrame(uint16_t can_id, const int16_t* data, uint8_t len)
+  - Sends a classical CAN frame; throws `CANException` on failure or if not initialised.
+- CANController::sendFrameFD(uint16_t can_id, const int16_t* data, uint8_t len)
+  - Sends a CAN_FD frame; throws `CANException` on failure or if not initialised.
+
+Notes:
+- The low-level APIs perform input validation (ID range, maximum payload length) and will truncate payloads beyond the supported sizes.
+- The C++ wrapper uses exceptions to signal error conditions; the C APIs return -1 and set errno.
 
 ## 4. Algorithms
 - Prioritised scheduling ensures critical control messages are sent first.
 - For require_ack frames, a lightweight ACK protocol over CAN (application-level ACK) may be used
   with retransmission on timeout.
+ - Transmission details
+   - Low-level send operations use the `write()` syscall to the PF_CAN socket. Depending on socket flags this may block; use a worker thread or set the socket non-blocking to avoid blocking the main control loop.
+   - During initialization `check_mtu_support` determines whether CAN_FD is supported and `setsockopt(..., CAN_RAW_FD_FRAMES, ...)` is used to enable FD frames when available.
+   - For CAN_FD frames the implementation sets `CANFD_BRS` to enable Bit Rate Switching.
+   - The transmit routines perform input validation and will truncate payloads that exceed allowed sizes (8 or 64 bytes).
 
 ## 5. Error Handling & Edge Cases
 - CAN bus off: attempt recovery and escalate to system alerts if unsuccessful.

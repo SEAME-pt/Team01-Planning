@@ -17,7 +17,6 @@ children:
   - id: LLTC-STM32_CAN_RX_MALFORMED
   - id: LLTC-STM32_CAN_RX_BUFFER_OVERFLOW
   - id: LLTC-STM32_CAN_RX_CONCURRENCY
-  - id: LLTC-STM32_CAN_RX_E2E
 
 parents:
   - id: SRD-STM32_CAN_BUS
@@ -53,8 +52,8 @@ ensuring only validated commands affect actuators and system state.
   - Enforce safety constraints (e.g., rate limits, allowed ranges) and provide fail-safe default behaviour for invalid commands.
 
 ## 3. Interfaces
-- register_command_handler(cmd_id: int, handler: Callable[[bytes], None])
-- get_last_command(cmd_id: int) -> Optional[bytes]
+#- register_command_handler(cmd_id: int, handler: Callable[[bytes], None])
+#- get_last_command(cmd_id: int) -> Optional[bytes]
 
 ## 4. Algorithms
 - Validate and enqueue commands; apply them in a deterministic control loop tick to ensure predictable timing.
@@ -64,5 +63,5 @@ ensuring only validated commands affect actuators and system state.
 - Bus-off: attempt recovery and escalate if persistent.
 
 ## 6. Links to lower levels
-- LLTC-STM32_CAN_RX_* series covering basic functionality, latency, heartbeat, bus-off recovery, malformed frames, buffer overflow, concurrency and e2e integration.
+- LLTC-STM32_CAN_RX_* series covering basic functionality, latency, heartbeat, bus-off recovery, malformed frames, buffer overflow and concurrency.
 

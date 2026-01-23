@@ -13,8 +13,7 @@ children:
 
 parents:
   - id: URD-CONTROL_VEHICLE_SPEED
-  - id: URD-SPEED_SENSOR
-  - id: URD-EMERGENCY_STOP
+  - id: URD-DASHBOARD_DISPLAY_SPEED
 
 reviewers:
   - name: "Afonso Mota"
@@ -23,10 +22,6 @@ reviewers:
     email: "jose.meneses@seame.pt"
 
 reviewed: ''
-
-#references:
-#  - type: "standard"
-#    name: "CAN 2.0B Specification"
 
 active: true
 derived: false
@@ -47,7 +42,4 @@ The STM32 shall implement CAN bus communication that:
 - Provides heartbeat messages for connection monitoring with Raspberry Pi
 - Handles bus-off recovery and fault-tolerant operation on STM32 hardware
 - Supports message prioritization for critical control commands
-- Maintains message integrity through CRC checking
-- Logs communication errors for diagnostics via STM32 serial interface
-- Monitors CAN bus health and reports faults to Raspberry Pi
 - Ensures deterministic timing for real-time control applications

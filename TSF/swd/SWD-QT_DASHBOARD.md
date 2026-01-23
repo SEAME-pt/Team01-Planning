@@ -2,30 +2,30 @@
 id: SWD-QT_DASHBOARD
 header: "QT Dashboard Software Design"
 text: |
-	This document describes the software design for the QT-based dashboard application.
-	It details the UI components, data ingestion from CAN, persistence for telemetry, and
-	interfaces for configuration and diagnostics. The design focuses on timely updates,
-	accessibility, and safe display of emergency indicators.
+  This document describes the software design for the QT-based dashboard application.
+  It details the UI components, data ingestion from CAN, persistence for telemetry, and
+  interfaces for configuration and diagnostics. The design focuses on timely updates,
+  accessibility, and safe display of emergency indicators.
 
 tsf_type: "Design"
 verification_method: "Design review, UI acceptance tests, hardware-in-the-loop integration tests"
 
 children:
-	- id: LLTC-QT_BASIC_DISPLAY
-	- id: LLTC-QT_LATENCY
-	- id: LLTC-QT_UNITS
-	- id: LLTC-QT_EMERGENCY_INDICATOR
-	- id: LLTC-QT_ACCESSIBILITY
-	- id: LLTC-QT_PERSISTENCE
+  - id: LLTC-QT_BASIC_DISPLAY
+  - id: LLTC-QT_LATENCY
+  - id: LLTC-QT_UNITS
+  - id: LLTC-QT_EMERGENCY_INDICATOR
+  - id: LLTC-QT_ACCESSIBILITY
+  - id: LLTC-QT_PERSISTENCE
 
 parents:
-	- id: SRD-QT_DASHBOARD
+  - id: SRD-QT_DASHBOARD
 
 reviewers:
-	- name: "Afonso Mota"
-		email: "afonso.mota@seame.pt"
-	- name: "José Meneses"
-		email: "jose.meneses@seame.pt"
+  - name: "Afonso Mota"
+    email: "afonso.mota@seame.pt"
+  - name: "José Meneses"
+    email: "jose.meneses@seame.pt"
 
 reviewed: ''
 
