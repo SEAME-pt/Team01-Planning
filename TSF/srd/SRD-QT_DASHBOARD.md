@@ -1,17 +1,16 @@
 ---
 id: SRD-QT_DASHBOARD
-header: "QT Dashboard Display Requirements"
+header: "Qt Dashboard Display System"
 text: |
-  The QT dashboard shall display vehicle speed and associated status information to
-  the driver and to diagnostic systems. The display shall be clear, responsive, and
-  provide visual prioritisation for safety‑critical information (e.g., emergency stop,
-  fault indicators).
+  The system shall implement a Qt-based dashboard for displaying vehicle speed and other metrics. The dashboard must provide real-time updates, user-friendly interface, and reliable data presentation with error handling for communication failures.
 
 tsf_type: "Assertion"
-verification_method: "Integration testing, UI acceptance tests, manual inspection"
+verification_method: "UI testing, integration testing with data sources, usability evaluation, and performance benchmarking."
 
 children:
-  - id: SWD-QT_DASHBOARD
+  - id: SWD-QT_SPEED_DISPLAY
+  - id: SWD-QT_GUI_INTERFACE
+  - id: SWD-QT_DATA_HANDLING
 
 parents:
   - id: URD-DASHBOARD_DISPLAY_SPEED
@@ -24,34 +23,27 @@ reviewers:
 
 reviewed: ''
 
+references:
+  - type: "file"
+    path: TSF/urd/URD-DASHBOARD_DISPLAY_SPEED.md
+
 active: true
 derived: false
 normative: true
 level: 2.0
-tags: ["dashboard", "qt", "display", "ui", "safety"]
+tags: ["qt", "dashboard", "display", "gui", "speed", "user-interface", "priority-high"]
 
 ---
 # Software Requirement Statement
 
-The QT Dashboard shall satisfy the following requirements:
+The Qt dashboard shall:
 
-- Display real-time vehicle speed in km/h with an accuracy of ±0.5 km/h for speeds in range 0–200 km/h.
-- Update the displayed speed at least every 100 ms with end-to-end latency from the CAN message arrival to visual update under 150 ms for speed messages.
-- Support configurable unit (km/h or mph) selectable in settings and persist the user choice across reboots.
-- Prominently display emergency stop state: when an emergency stop is active, show a red, high-contrast indicator and freeze the speed display to the last safe value.
-- Ensure visual contrast and text size meet accessibility guidelines for read‑ability at 50 cm under nominal cabin lighting.
-- Provide a test-mode that overlays a timestamp and a message trace for debugging and verification.
-- The dashboard shall not block critical control loops; UI rendering must run in a separate process or thread ensuring no perceptible impact on real-time control (control loop jitter increase < 1 ms).
-- On startup, show a visible loading state and ensure the speed display initializes to a detectable default (e.g., 0.0 km/h) within 2 s of boot.
-- Handle malformed or delayed speed messages gracefully: ignore malformed messages, mark source as suspect after three consecutive malformed messages, and display a warning icon.
-
-## Verification
-Each requirement above shall have corresponding tests in the LLTC set for `SWD-QT_DASHBOARD`:
-
-- Functional tests for display correctness and units.
-- Timing tests for update rate and latency (HIL measurements).
-- Accessibility and contrast checks (manual inspection or automated screenshot-based tests).
-- Fault injection tests for CAN errors, malformed messages and persistence limits.
-
----
-
+- Display current vehicle speed with high visibility and accuracy
+- Receive speed data from Raspberry Pi via network or direct interface
+- Update display at least 5 times per second for smooth visualization
+- Provide clear numerical and graphical speed indicators
+- Handle communication errors by showing last known speed or error messages
+- Support configurable display units (km/h, mph)
+- Include safety warnings for overspeed conditions
+- Maintain responsive UI during high CPU load
+- Support multiple display resolutions and themes

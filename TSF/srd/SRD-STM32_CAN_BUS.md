@@ -27,7 +27,7 @@ active: true
 derived: false
 normative: true
 level: 2.0
-tags: ["stm32", "can-bus", "communication", "real-time", "error-handling", "protocol", "priority-high"]
+tags: ["stm32", "can-bus", "communication", "real-time", "protocol", "priority-high"]
 
 ---
 # Software Requirement Statement

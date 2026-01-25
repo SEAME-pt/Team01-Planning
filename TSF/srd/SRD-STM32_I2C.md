@@ -8,7 +8,9 @@ tsf_type: "Assertion"
 verification_method: "I2C bus testing, motor control integration testing, signal integrity verification, and fault injection testing."
 
 children:
-  - id: SWD-I2C_PROTOCOL_INTERFACE
+  - id: SWD-STM32_I2C_DC_MOTOR
+  - id: SWD-STM32_I2C_SERVO_MOTOR
+  - id: SWD-STM32_I2C_EMERGENCY_STOP
 
 parents:
   - id: URD-CONTROL_VEHICLE_SPEED
@@ -33,13 +35,10 @@ tags: ["i2c", "motor-control", "stm32", "communication", "actuators", "priority-
 
 The system shall implement I2C communication on STM32 that:
 
-- Operates at 400 kHz fast mode with 7-bit addressing
 - Sends motor speed control commands (0-100% duty cycle) to motor controllers
-- Receives motor status feedback including current speed, temperature, and fault conditions
+- Receives motor status feedback including current speed, and fault conditions
 - Implements master mode on STM32 for controlling multiple motor slaves
 - Provides error detection and retry mechanisms for I2C communication failures
 - Supports emergency stop commands with immediate motor shutdown capability
 - Maintains synchronization between commanded and actual motor speeds
-- Handles bus arbitration and multi-master scenarios if required
-- Monitors I2C bus health and reports communication faults
 - Ensures deterministic timing for real-time motor control applications

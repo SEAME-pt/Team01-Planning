@@ -2,7 +2,7 @@
 
 A short, clear guide to install TSF on a Linux machine.
 
-## Index 📚
+## Index
 
 Use this index to jump to the section you need:
 
@@ -24,7 +24,7 @@ Use this index to jump to the section you need:
 
 ---
 
-## Prerequisites 🔧
+## Prerequisites
 
 - **OS:** Linux
 - **Tools:** `git`, `python3` (recommended 3.8+), `pip`
@@ -32,21 +32,21 @@ Use this index to jump to the section you need:
 
 ---
 
-## Quick install ⚡
+## Quick install
 
 ```bash
 # Clone (SSH)
-git clone git@github.com:SEAME-pt/Team04_DrivaPi.git
+git clone git@github.com:SEAME-pt/Team01-Planning.git
 # Or clone (HTTPS)
-# git clone https://github.com/SEAME-pt/Team04_DrivaPi.git
-cd Team04_DrivaPi
+git clone https://github.com/SEAME-pt/Team01-Planning
+cd Team01-Planning
 
 # Create and activate a virtual environment
 python3 -m venv .venv
 source .venv/bin/activate
 
 # Upgrade pip and install dependencies
-python3 -m pip install --upgrade pip pyyaml
+python3 -m pip install --upgrade pip pyyaml typing_extensions
 
 # Install trudag (official TSF tool)
 # Note: trudag is part of the trustable project
@@ -63,12 +63,7 @@ trudag --version
 
 ---
 
-## Quick test / usage ✅
-
-- Run project tests (if available):
-```bash
-pytest
-```
+## Quick usage
 - Get help for the installed tool:
 ```bash
 trudag --help
