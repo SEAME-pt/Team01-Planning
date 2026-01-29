@@ -8,12 +8,11 @@ tsf_type: "Assertion"
 verification_method: "Sensor integration testing, accuracy validation, fault injection testing, and signal integrity verification."
 
 children:
-  - id: SWD-STM32_SPEED_SENSOR_READING
-  - id: SWD-STM32_SPEED_SENSOR_PROCESSING
+  - id: SWD-STM32_SPEED_SENSOR
 
 parents:
-  - id: URD-CONTROL_VEHICLE_SPEED
-  - id: URD-DASHBOARD_DISPLAY_SPEED
+  - id: URD-CONTROL_VEHICLE
+  - id: URD-DASHBOARD
 
 reviewers:
   - name: "Afonso Mota"
@@ -25,9 +24,9 @@ reviewed: ''
 
 references:
   - type: "file"
-    path: TSF/urd/URD-CONTROL_VEHICLE_SPEED.md
+    path: TSF/urd/URD-CONTROL_VEHICLE.md
   - type: "file"
-    path: TSF/urd/URD-DASHBOARD_DISPLAY_SPEED.md
+    path: TSF/urd/URD-DASHBOARD.md
 
 active: true
 derived: false

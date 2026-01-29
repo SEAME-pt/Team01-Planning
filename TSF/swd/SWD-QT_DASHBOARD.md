@@ -11,12 +11,7 @@ tsf_type: "Design"
 verification_method: "Design review, UI acceptance tests, hardware-in-the-loop integration tests"
 
 children:
-  - id: LLTC-QT_BASIC_DISPLAY
-  - id: LLTC-QT_LATENCY
-  - id: LLTC-QT_UNITS
-  - id: LLTC-QT_EMERGENCY_INDICATOR
-  - id: LLTC-QT_ACCESSIBILITY
-  - id: LLTC-QT_PERSISTENCE
+  - id: LLTC-QT_DASHBOARD
 
 parents:
   - id: SRD-QT_DASHBOARD
