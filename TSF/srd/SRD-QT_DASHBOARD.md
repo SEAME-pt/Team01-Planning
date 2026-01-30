@@ -8,12 +8,10 @@ tsf_type: "Assertion"
 verification_method: "UI testing, integration testing with data sources, usability evaluation, and performance benchmarking."
 
 children:
-  - id: SWD-QT_SPEED_DISPLAY
-  - id: SWD-QT_GUI_INTERFACE
-  - id: SWD-QT_DATA_HANDLING
+  - id: SWD-QT_DASHBOARD
 
 parents:
-  - id: URD-DASHBOARD_DISPLAY_SPEED
+  - id: URD-DASHBOARD
 
 reviewers:
   - name: "Afonso Mota"
@@ -25,7 +23,7 @@ reviewed: ''
 
 references:
   - type: "file"
-    path: TSF/urd/URD-DASHBOARD_DISPLAY_SPEED.md
+    path: TSF/urd/URD-DASHBOARD.md
 
 active: true
 derived: false

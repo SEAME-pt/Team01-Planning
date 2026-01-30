@@ -1,6 +1,6 @@
 ---
-id: SWD-STM32_SPEED_SENSOR_READING
-header: "STM32 Speed Sensor Data Reading Design"
+id: SWD-STM32_SPEED_SENSOR
+header: "STM32 Speed Sensor Design"
 text: |
   This design specifies the data acquisition from speed sensors on STM32, including interface protocols, sampling rates, and initial data validation for reliable speed measurement.
 
@@ -8,8 +8,7 @@ tsf_type: "Design"
 verification_method: "Hardware integration testing, signal capture analysis, unit testing."
 
 children:
-  - id: LLTC-STM32_SPEED_SENSOR_INPUT
-  - id: LLTC-STM32_SPEED_SENSOR_SAMPLING
+  - id: LLTC-STM32_SPEED_SENSOR
 
 parents:
   - id: SRD-SPEED_SENSOR
