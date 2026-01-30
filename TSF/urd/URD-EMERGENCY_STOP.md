@@ -9,6 +9,7 @@ verification_method: "Demonstration during vehicle operation, user acceptance te
 
 children:
   - id: SRD-STM32_I2C
+  - id: SRD-CAN_BUS
 
 parents: []
 
